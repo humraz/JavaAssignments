@@ -1,0 +1,62 @@
+package com.deloitte;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ValidateSrtFile {
+
+	public static void main(String[] args) {
+		int n = 0;
+		Pattern pattern = Pattern
+				.compile(".*\\d{2}:\\d{2}:\\d{2},\\d{3} --> \\d{2}:\\d{2}:\\d{2},\\d{3}.*");
+		Pattern number = Pattern.compile("\\d{1}");
+		Pattern text = Pattern.compile("^[a-zA-Z?!&' ]$");
+
+		BufferedReader bw2 = null;
+		File f2 = new File("myfile.srt");
+		try {
+			FileReader fw2 = new FileReader(f2);
+			bw2 = new BufferedReader(fw2);
+			String l = bw2.readLine();
+
+			while (l != null) {
+				System.out.println(l);
+				l = bw2.readLine();
+				Matcher time = pattern.matcher(l);
+				boolean timee = time.matches();
+				Matcher num = number.matcher(l);
+				boolean numberr = num.matches();
+				Matcher words = text.matcher(l);
+				boolean textt = words.matches();
+				if (numberr == true)
+					System.out.println("number");
+				if (timee == true)
+					System.out.println("time");
+				if (textt == true)
+					System.out.println("text");
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			if (bw2 != null) {
+				try {
+					bw2.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		}
+	}
+}

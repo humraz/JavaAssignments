@@ -1,0 +1,5 @@
+package Calculaotr;
+
+public interface CalcInterface {
+int calculate(int n);
+}

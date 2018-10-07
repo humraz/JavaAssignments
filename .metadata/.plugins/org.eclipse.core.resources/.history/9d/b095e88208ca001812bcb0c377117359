@@ -1,0 +1,46 @@
+package com.deloitte;
+
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class IdAndPasswordValidator {
+
+	Pattern pattern;
+	Matcher matcher;
+	String regex = "^\\d{3}-\\d{2}-\\d{4}$";
+	static String passregex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+
+	public IdAndPasswordValidator() {
+		pattern = Pattern.compile(regex);
+
+	}
+
+	public static void main(String[] args) {
+		IdAndPasswordValidator nv = new IdAndPasswordValidator();
+		Pattern passpattern = Pattern.compile(passregex);
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Enter ID ");
+		String input = scan.nextLine();
+		boolean valid = nv.validate(input);
+		System.out.println("ID valid: " + valid);
+		if (valid == true) {
+			System.out.println("Enter Password");
+			String pass = scan.nextLine();
+			Matcher passmatch = passpattern.matcher(pass);
+
+			boolean passvalid = passmatch.matches();
+			if (passvalid) {
+				System.out.println("password valid");
+			} else
+				System.out.println("Password Invalid");
+		}
+
+	}
+
+	private boolean validate(String input) {
+		matcher = pattern.matcher(input);
+		return matcher.matches();
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.deloitte;
+
+import java.util.Random;
+
+public class AlternatePrint {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Random r = new Random();
+		for (int i = 0; i < 20; i++) {
+			System.out.print(" " +(r.nextInt(13-8+1)+8));
+			System.out.print(" "+ (r.nextInt(6-1+1)+1));
+		}
+	}
+
+}
